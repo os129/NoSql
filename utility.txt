@@ -1,0 +1,9 @@
+mongorestore --db arav C:\Users\karth\aravind1\ara
+
+mongodump --db ara  --gzip --archive="malan.gz"
+
+mongodump --db ara --out aravind1
+
+mongoexport --db ara --collection vind --out aravind.json
+
+>mongoimport --db ara --collection vind --file "C:\Users\karth\Downloads\Persons 1.json" --jsonArray --legacy

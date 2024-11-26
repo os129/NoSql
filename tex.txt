@@ -1,0 +1,31 @@
+from pymongo import MongoClient
+
+client = MongoClient("mongodb://localhost:27017/")
+db = client["test_database"]
+collection = db["test_collection"]
+
+# Create
+document = {"name": "Alice", "age": 25, "city": "New York"}
+collection.insert_one(document)
+
+documents = [
+    {"name": "Bob", "age": 30, "city": "Chicago"},
+    {"name": "Charlie", "age": 35, "city": "San Francisco"}
+]
+collection.insert_many(documents)
+
+# Read
+one_document = collection.find_one({"name": "Alice"})
+print(one_document)
+
+all_documents = collection.find({"age": {"$gt": 20}})
+for doc in all_documents:
+    print(doc)
+
+# Update
+collection.update_one({"name": "Alice"}, {"$set": {"age": 26}})
+collection.update_many({"age": {"$lt": 35}}, {"$set": {"city": "Updated City"}})
+
+# Delete
+collection.delete_one({"name": "Alice"})
+collection.delete_many({"age": {"$gt": 25}})
